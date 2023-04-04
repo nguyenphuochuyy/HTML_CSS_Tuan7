@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stop Watch</title>
+    <style>
+        .Stop_watch{
+            width: 800px;
+            margin: 30px auto;
+            color:$white;
+            text-align:center;
+            
+        }
+        .Stop_watch button {
+            background-color: aqua  ;
+            width: 100px;
+            height: 40px;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+        p{
+            color: orange;
+            font-size: 30px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="Stop_watch">
+        <h1>Stop Watch</h1>
+        <p><span id="hours">00</span> : <span id="minute">00</span> : <span id="seconds">00</span> : <span id="mili">00</span></p>
+        <button id="btnStart">Start</button>
+        <button id="btnStop">Stop</button>
+        <button id="btnReset">Reset</button>
+    </div>
+  
+    <script>
+        window.onload = function(){
+            var minute = 00;
+            var seconds = 00;
+            var mili = 00;
+            var hours = 00;
+            var appendMili = document.getElementById("mili")
+            var appendSeconds = document.getElementById("seconds")
+            var appendMinute = document.getElementById("minute")
+            var appendHours = document.getElementById("hours")
+            var buttonStart = document.getElementById("btnStart")
+            var buttonReset = document.getElementById("btnReset")
+            var buttonStop = document.getElementById("btnStop")
+            var Interval
+
+            buttonStart.onclick = function(){
+                clearInterval(Interval);
+                Interval = setInterval(start,10);
+            }
+
+            buttonReset.onclick = function(){
+                clearInterval(Interval);
+                mili = "00";
+                seconds = "00"
+                minute = "00"
+                appendMili.innerHTML = mili;
+                appendSeconds.innerHTML = seconds;
+                appendMinute.innerHTML = minute;
+            }
+            buttonStop.onclick = function(){
+                clearInterval(Interval);
+            }
+
+            function start(){
+                mili++;
+                if(mili <= 9)
+                {
+                    appendMili.innerHTML = "0" + mili;
+                }
+                if(mili > 9)
+                {
+                    appendMili.innerHTML = mili;
+                }
+                if(mili > 99)
+                {
+                    console.log("Seconds");
+                    seconds++;
+                    appendSeconds.innerHTML = "0" + seconds;
+                    mili = 0;
+                    appendMili.innerHTML = "0" + 0;
+                    
+                }
+                if(seconds > 9){
+                    appendSeconds.innerHTML = seconds;
+                }
+                if(seconds > 60)
+                {
+                    minute++;
+                    appendMinute.innerHTML = 0 + minute;
+                    seconds = 0 ;
+                    mili = 0;
+                    appendMili.innerHTML = "0" + 0;
+                    appendSeconds.innerHTML = "0" + 0;
+                }
+                if(minute > 9)
+                {
+                    appendMinute.innerHTML = minute;
+                }
+                if(minute > 60)
+                {
+                    hours++;
+                    appendHours.innerHTML = 0 + hours;
+                    minute = 0;
+                    seconds = 0;
+                    mili = 0;
+                    appendMili.innerHTML = "0" + 0;
+                    appendSeconds.innerHTML = "0" + 0;
+                    appendMinute.innerHTML = "0" + 0;
+                }
+            }
+        }
+    </script>
+</body>
+</html>
